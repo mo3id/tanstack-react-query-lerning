@@ -15,4 +15,8 @@ export interface PostFilterProps {
 
 export interface PostLIstProps {
   selectedPostStatus: PostStatusType;
+  searchQuery: string;
+}
+export interface SearchQueryProps {
+  setSearchQuery: (value: string) => void;
 }

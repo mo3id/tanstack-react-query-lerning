@@ -21,6 +21,7 @@ const useGetPosts = (
     queryFn: () => fetchPosts(selectedStatus),
     staleTime: 1000 * 10,
   });
+  
   return query;
 };
 
