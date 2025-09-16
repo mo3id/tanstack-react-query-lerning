@@ -8,7 +8,6 @@ const fetchData = async (q: string): Promise<Post[]> => {
   return response.data;
 };
 const useSearch = (q: string): UseQueryResult<Post[]> => {
-  console.log(q);
   return useQuery({
     queryKey: ["posts", "search", { q }],
     queryFn: () => fetchData(q),
