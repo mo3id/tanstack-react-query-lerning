@@ -68,7 +68,9 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostLIstProps) => {
               <tr key={ele.id}>
                 <td>{++idx}</td>
                 <td>
-                  <Link to="/info">{ele.title}</Link>
+                  <Link to={`/info?id=${ele.id}&type=paginate&key=${paginate}`}>
+                    {ele.title}
+                  </Link>
                 </td>
                 <td>{ele.status}</td>
                 <td style={{ textAlign: "center" }}>
@@ -90,7 +92,11 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostLIstProps) => {
               <tr key={ele.id}>
                 <td>{++idx}</td>
                 <td>
-                  <Link to="/info">{ele.title}</Link>
+                  <Link
+                    to={`/info?id=${ele.id}&type=search&key=${searchQuery}`}
+                  >
+                    {ele.title}
+                  </Link>
                 </td>
                 <td>{ele.status}</td>
                 <td style={{ textAlign: "center" }}>
