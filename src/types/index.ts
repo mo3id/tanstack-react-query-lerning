@@ -20,3 +20,14 @@ export interface PostLIstProps {
 export interface SearchQueryProps {
   setSearchQuery: (value: string) => void;
 }
+
+export interface CommentPost {
+  body: string;
+  post_id: number;
+}
+
+export interface CommentResponse {
+  id: number;
+  body: string;
+  post_id: number;
+}
