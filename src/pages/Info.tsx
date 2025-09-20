@@ -68,9 +68,9 @@ const Info = () => {
               Submit
             </Button>
           </Form>
-          {getComments.isLoading || getComments.isFetching
+          {getComments.isLoading
             ? "loading please wait.."
-            : getComments?.data?.map((el) => <p>{el.body}</p>)}
+            : getComments?.data?.map((el) => <p key={el.id}>{el.body}</p>)}
           <p>Comment 1</p>
           <p>Comment 2</p>
         </Col>
