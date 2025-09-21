@@ -8,7 +8,7 @@ import { CommentPost, CommentResponse } from "../types";
 
 const requestData = async (data: CommentPost): Promise<CommentResponse> => {
   const result = await axios.post<CommentResponse>(
-    "http://localhost:3005/comments",
+    "https://json-server-api-production-fcb3.up.railway.app/comments",
     data
   );
   return result.data;

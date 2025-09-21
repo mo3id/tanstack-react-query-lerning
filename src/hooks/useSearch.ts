@@ -3,7 +3,7 @@ import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { Post } from "../types";
 const fetchData = async (q: string): Promise<Post[]> => {
   const response = await axios.get<Post[]>(
-    `http://localhost:3005/posts?q=${q}`
+    `https://json-server-api-production-fcb3.up.railway.app/posts?q=${q}`
   );
   return response.data;
 };

@@ -8,7 +8,7 @@ import axios from "axios";
 
 const fetchData = async (id: string): Promise<Post> => {
   const response = await axios.get<Post>(
-    `http://localhost:3005/posts/${id}`
+    `https://json-server-api-production-fcb3.up.railway.app/posts/${id}`
   );
   return response.data;
 };

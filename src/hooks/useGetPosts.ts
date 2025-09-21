@@ -8,12 +8,12 @@ export const fetchPosts = async (
 ): Promise<Post[]> => {
   if (selectedStatus == "all") {
     const result = await axios.get<Post[]>(
-      `http://localhost:3005/posts?_page=${paginate}&_limit=5`
+      `https://json-server-api-production-fcb3.up.railway.app/posts?_page=${paginate}&_limit=5`
     );
     return result.data;
   } else {
     const result = await axios.get<Post[]>(
-      `http://localhost:3005/posts?status=${selectedStatus}`
+      `https://json-server-api-production-fcb3.up.railway.app/posts?status=${selectedStatus}`
     );
     return result.data;
   }
@@ -23,7 +23,7 @@ const useGetPosts = (
   paginate: number
 ): UseQueryResult<Post[]> => {
   const query = useQuery<Post[], Error>({
-    queryKey: ["posts", selectedStatus, paginate],
+    queryKey: ["posts", {selectedStatus, paginate}],
     queryFn: () => fetchPosts(selectedStatus, paginate),
     staleTime: 1000 * 60 * 1,
     refetchInterval: 1000 * 60 * 2,

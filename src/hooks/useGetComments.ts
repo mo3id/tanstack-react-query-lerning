@@ -7,7 +7,7 @@ const fetchData = async (
   signal: AbortSignal
 ): Promise<CommentResponse[]> => {
   const result = await axios.get<CommentResponse[]>(
-    `http://localhost:3005/comments?post_id=${post_id}&_sort=id&_order=desc`,
+    `https://json-server-api-production-fcb3.up.railway.app/comments?post_id=${post_id}&_sort=id&_order=desc`,
     { signal }
   );
 

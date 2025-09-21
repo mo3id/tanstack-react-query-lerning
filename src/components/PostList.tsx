@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useIsFetching, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import useGetPosts from "../hooks/useGetPosts";
 import useSearch from "../hooks/useSearch";
@@ -8,6 +8,7 @@ import { fetchPosts } from "../hooks/useGetPosts";
 
 import { PostStatusType } from "../types/index";
 import { Table, Form, Button, ButtonGroup } from "react-bootstrap";
+import useRemovePost from "../hooks/useRemovePost";
 
 interface PostListProps {
   selectedPostStatus: PostStatusType;
@@ -19,7 +20,9 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
 
   const queryClient = useQueryClient();
 
-  const { isLoading, data, isError, error, isStale, refetch } = useGetPosts(
+  const globalLoading = useIsFetching();
+
+  const { data, isError, error, isStale, refetch } = useGetPosts(
     selectedPostStatus,
     paginate
   );
@@ -28,6 +31,7 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
 
   const searchData = useSearch(searchQuery);
 
+  const deleteAction = useRemovePost();
   useEffect(() => {
     const nextPage = paginate + 1;
     if (nextPage > 3) return;
@@ -37,7 +41,7 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
     });
   }, [paginate, queryClient]);
 
-  if (isLoading || searchData.isLoading) {
+  if (globalLoading) {
     return <p>loading please wait</p>;
   }
 
@@ -80,7 +84,7 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
                 </td>
                 <td>{el.status}</td>
                 <td style={{ textAlign: "center" }}>
-                  <Form.Check // prettier-ignore
+                  <Form.Check
                     type="switch"
                     onChange={(e) =>
                       updateRate.mutate({
@@ -95,7 +99,13 @@ const PostList = ({ selectedPostStatus, searchQuery }: PostListProps) => {
                 </td>
                 <td>
                   <ButtonGroup aria-label="Basic example">
-                    <Button variant="danger">Delete</Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => deleteAction.mutate(el.id)}
+                      disabled={selectedPostStatus != "all"}
+                    >
+                      Delete
+                    </Button>
                   </ButtonGroup>
                 </td>
               </tr>

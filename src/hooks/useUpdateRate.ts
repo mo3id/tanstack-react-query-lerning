@@ -9,7 +9,7 @@ import { Post, TopRatePost } from "../types";
 
 const updateRate = async (rate: TopRatePost): Promise<Post> => {
   const result = await axios.patch<Post>(
-    `http://localhost:5005/posts/${rate.postId}`,
+    `https://json-server-api-production-fcb3.up.railway.app/posts/${rate.postId}`,
     { topRate: rate.rateValue }
   );
   return result.data;

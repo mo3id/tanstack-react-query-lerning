@@ -71,8 +71,6 @@ const Info = () => {
           {getComments.isLoading
             ? "loading please wait.."
             : getComments?.data?.map((el) => <p key={el.id}>{el.body}</p>)}
-          <p>Comment 1</p>
-          <p>Comment 2</p>
         </Col>
       </Row>
     </div>
